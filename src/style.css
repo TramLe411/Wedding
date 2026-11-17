@@ -1318,7 +1318,7 @@ body, button, input, textarea, select,
 
 .hero.paper-section {
   background-color: #f7f1e7 !important;
-  background-image: url("./images/wedding-background.png") !important;
+  background-image: url("/public/images/wedding-background.png") !important;
   background-position: center top !important;
   background-size: 100% 100% !important;
   background-repeat: no-repeat !important;
