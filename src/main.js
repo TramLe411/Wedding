@@ -68,7 +68,7 @@ root.innerHTML = `
 
     <div class="envelope">
       <div class="envelope-photo">
-        <img src="${photos[1]}" alt="Ảnh cưới đầy đủ">
+        <img src="/images/photo-03.jpg" alt="Ảnh cưới Duy Thành và Như Trâm">
       </div>
 
       <div class="envelope-front">
