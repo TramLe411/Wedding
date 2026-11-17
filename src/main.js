@@ -1,4 +1,3 @@
-
 import { wedding as w } from './config.js';
 
 const photos = [
@@ -28,8 +27,8 @@ root.innerHTML = `
 <audio id="music" src="${w.music}" loop preload="auto"></audio>
 
 <div class="cover-screen" id="cover">
-  <div class="cover-ornament top-left">✿</div>
-  <div class="cover-ornament bottom-right">✿</div>
+  <img class="cover-ornament top-left" src="/images/envelope-floral.png" alt="" aria-hidden="true">
+  <img class="cover-ornament bottom-right" src="/images/envelope-floral.png" alt="" aria-hidden="true">
 
   <div class="cover-card">
     <div class="cover-heart">♥</div>
@@ -266,6 +265,8 @@ root.innerHTML = `
 let slide = 0;
 const audio = $('#music');
 
+startAmbientParticles();
+
 function renderSlide() {
   const mainPhoto = $('#mainPhoto');
   mainPhoto.classList.add('photo-changing');
@@ -308,11 +309,43 @@ $('#dots').addEventListener('click', e => {
 
 setInterval(next, 4200);
 
+function startAmbientParticles() {
+  const layer = $('#heartParticles');
+  if (!layer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const symbols = ['✦', '♥', '♡', '❧'];
+  const spawn = () => {
+    // Stop adding ambient particles as soon as the cover starts to close.
+    if ($('#cover')?.classList.contains('closing')) return;
+    // Keep a small number of particles alive so the cover feels gently animated.
+    if (document.querySelectorAll('.ambient-particle').length >= 16) return;
+
+    const particle = document.createElement('span');
+    particle.className = 'ambient-particle';
+    particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+    particle.style.left = (4 + Math.random() * 92) + 'vw';
+    particle.style.setProperty('--drift', (Math.random() * 100 - 50).toFixed(1) + 'px');
+    particle.style.setProperty('--rise', (90 + Math.random() * 170).toFixed(1) + 'px');
+    particle.style.setProperty('--duration', (6.5 + Math.random() * 4).toFixed(2) + 's');
+    particle.style.setProperty('--scale', (0.55 + Math.random() * 0.7).toFixed(2));
+    layer.appendChild(particle);
+
+    particle.addEventListener('animationend', () => particle.remove(), { once: true });
+  };
+
+  // Stagger the first few particles, then keep the movement calm and continuous.
+  for (let i = 0; i < 7; i++) {
+    window.setTimeout(spawn, i * 420);
+  }
+  window.setInterval(spawn, 620);
+}
+
 function launchHearts() {
   const layer = $('#heartParticles');
   if (!layer) return;
 
-  layer.replaceChildren();
+  layer.querySelectorAll('.ambient-particle').forEach(p => p.remove());
 
   const button = $('#open');
   const rect = button
