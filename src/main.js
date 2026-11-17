@@ -213,20 +213,39 @@ root.innerHTML = `
         .map(x => `<span>${x}</span>`).join('')}
     </div>
 
-    <div class="calendar-grid days">
-      ${Array.from({ length: 35 }, (_, i) => {
-        const d = i - 1;
-        return `<span class="${d === 16 ? 'wedding-day' : ''}">
-          ${d > 0 && d <= 31 ? d : ''}
-          ${d === 16 ? '<b>♥</b>' : ''}
-        </span>`;
-      }).join('')}
-    </div>
+    
+<div class="calendar-grid days">
+  ${Array.from({ length: 35 }, (_, i) => {
+    const d = i - 1;
+    if (d < 1 || d > 31) {
+      return `<span class="empty-day"></span>`;
+    }
 
-    <a class="text-link" href="${calendarUrl}"
-      target="_blank" rel="noreferrer">
-      Thêm vào lịch
-    </a>
+    if (d === 16) {
+      return `
+        <span class="wedding-day">
+          <svg class="heart-marker" viewBox="0 0 100 90"
+               xmlns="http://www.w3.org/2000/svg"
+               aria-hidden="true">
+            <path d="M50 88
+              C43 81 5 52 5 27
+              C5 10 17 2 31 2
+              C40 2 47 7 50 16
+              C54 7 61 2 70 2
+              C84 2 95 10 95 27
+              C95 52 57 81 50 88Z"
+              fill="#651522"/>
+          </svg>
+          <span class="day-number">16</span>
+        </span>`;
+    }
+
+    return `<span class="calendar-day">${d}</span>`;
+  }).join('')}
+</div>
+</div>
+</section>
+
   </div>
 </section>
 
