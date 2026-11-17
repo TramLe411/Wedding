@@ -28,11 +28,15 @@ root.innerHTML = `
 <audio id="music" src="${w.music}" loop preload="auto"></audio>
 
 <div class="cover-screen" id="cover">
-  <img class="cover-ornament top-left" src="/images/envelope-floral.png" alt="" aria-hidden="true">
-  <img class="cover-ornament bottom-right" src="/images/envelope-floral.png" alt="" aria-hidden="true">
-
   <div class="cover-card">
-    <div class="cover-heart">♥</div>
+    <img class="cover-ornament top-left" src="/images/envelope-floral.png" alt="" aria-hidden="true">
+    <img class="cover-ornament bottom-right" src="/images/envelope-floral.png" alt="" aria-hidden="true">
+
+    <div class="cover-heart" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false">
+        <path d="M12 21.35 10.55 20C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.51L12 21.35Z" />
+      </svg>
+    </div>
     <div class="eyebrow">WEDDING INVITATION</div>
 
     <!-- SHORT NAMES ON THE FRONT COVER -->
@@ -56,8 +60,19 @@ root.innerHTML = `
 <div class="heart-particles" id="heartParticles" aria-hidden="true"></div>
 
 <main class="invitation" id="invitation">
+<div class="invitation-side-flowers" aria-hidden="true">
+  ${Array.from({ length: 7 }, (_, i) => `
+    <img class="side-blossom left" style="top:${6 + i * 14}%;--flower-delay:${-i * 1.1}s" src="/images/envelope-floral.png" alt="">
+    <img class="side-blossom right" style="top:${6 + i * 14}%;--flower-delay:${-i * 1.1 - .5}s" src="/images/envelope-floral.png" alt="">
+  `).join('')}
+</div>
 
 <header class="hero paper-section">
+  <div class="hero-side-flowers" aria-hidden="true">
+    <img class="hero-flower left" src="/images/envelope-floral.png" alt="">
+    <img class="hero-flower right" src="/images/envelope-floral.png" alt="">
+  </div>
+
   <div class="envelope-wrap">
     <img
       class="envelope-flower"
@@ -297,23 +312,24 @@ startAmbientParticles();
 
 let slideTransitionTimer;
 let slideAnimating = false;
-let cubeTurns = 0;
+let cubeAngle = 0;
 const cubeFaces = [$('#cubeFront'), $('#cubeRight'), $('#cubeBack'), $('#cubeLeft')];
 
-function renderSlide() {
+function renderSlide(direction = 1) {
   if (slideAnimating) return;
   slideAnimating = true;
 
   const carousel = $('#carousel');
   const cubeScene = $('#cubeScene');
   window.clearTimeout(slideTransitionTimer);
-  const incomingFace = (cubeTurns + 1) % cubeFaces.length;
+  const currentFront = ((-cubeAngle / 90) % cubeFaces.length + cubeFaces.length) % cubeFaces.length;
+  const incomingFace = (currentFront + direction + cubeFaces.length) % cubeFaces.length;
   cubeFaces[incomingFace].src = photos[slide];
-  cubeTurns += 1;
-  cubeScene.style.transform = `translate3d(-50%, -50%, 0) rotateY(${-90 * cubeTurns}deg)`;
+  cubeAngle -= direction * 90;
+  cubeScene.style.transform = `translate3d(-50%, -50%, 0) rotateY(${cubeAngle}deg)`;
 
   slideTransitionTimer = window.setTimeout(() => {
-    const frontFace = cubeTurns % cubeFaces.length;
+    const frontFace = ((-cubeAngle / 90) % cubeFaces.length + cubeFaces.length) % cubeFaces.length;
     const photoOffsets = [0, 1, 2, -1];
     photoOffsets.forEach((offset, position) => {
       const faceIndex = (frontFace + position) % cubeFaces.length;
@@ -330,13 +346,13 @@ function renderSlide() {
 function next() {
   if (slideAnimating) return;
   slide = (slide + 1) % photos.length;
-  renderSlide();
+  renderSlide(1);
 }
 
 function prev() {
   if (slideAnimating) return;
   slide = (slide - 1 + photos.length) % photos.length;
-  renderSlide();
+  renderSlide(-1);
 }
 
 $('#next').addEventListener('click', next);
@@ -346,8 +362,10 @@ $('#dots').addEventListener('click', e => {
   const b = e.target.closest('button[data-index]');
   if (b && !slideAnimating) {
     const nextSlide = Number(b.dataset.index);
+    if (nextSlide === slide) return;
+    const forwardDistance = (nextSlide - slide + photos.length) % photos.length;
     slide = nextSlide;
-    renderSlide();
+    renderSlide(forwardDistance <= photos.length / 2 ? 1 : -1);
   }
 });
 

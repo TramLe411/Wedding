@@ -1221,6 +1221,50 @@ body, button, input, textarea, select,
   object-position: right bottom;
 }
 
+.cover-ornament.top-left {
+  animation: coverFlowerFloatLeft 6.5s ease-in-out infinite;
+}
+
+.cover-ornament.bottom-right {
+  animation: coverFlowerFloatRight 7.2s ease-in-out -2.4s infinite;
+}
+
+@keyframes coverFlowerFloatLeft {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(45deg); }
+  50% { transform: translate3d(7px, 8px, 0) rotate(45deg); }
+}
+
+@keyframes coverFlowerFloatRight {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(330deg); }
+  50% { transform: translate3d(-7px, -8px, 0) rotate(330deg); }
+}
+
+.cover-card .cover-ornament {
+  z-index: 1;
+  width: clamp(111px, 27.8vw, 160px) !important;
+  height: clamp(147px, 35.7vw, 208px) !important;
+  opacity: .92 !important;
+}
+
+.cover-card .cover-ornament.top-left {
+  top: -21px;
+  left: -21px;
+  transform: rotate(45deg);
+  object-position: left top;
+}
+
+.cover-card .cover-ornament.bottom-right {
+  right: -25px;
+  bottom: -75px;
+  transform: rotate(330deg);
+  object-position: right bottom;
+}
+
+.cover-card > :not(.cover-ornament) {
+  position: relative;
+  z-index: 2;
+}
+
 .cover-footer {
   z-index: 2;
   bottom: max(17px, env(safe-area-inset-bottom));
@@ -1855,6 +1899,22 @@ body, button, input, textarea, select,
   font-size: 10px !important;
 }
 
+.cover-heart {
+  flex: 0 0 38px;
+  aspect-ratio: 1;
+}
+
+.cover-heart svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  overflow: visible;
+}
+
+.cover-heart svg path {
+  fill: currentColor;
+}
+
 .open-button,
 .calendar-button,
 .directions-button {
@@ -1938,6 +1998,135 @@ body, button, input, textarea, select,
   background: linear-gradient(90deg, rgba(35, 10, 18, .12), transparent 34%, transparent 72%, rgba(35, 10, 18, .16));
 }
 
+.carousel-arrow {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #6a1b28 !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+}
+
+.carousel-arrow:hover,
+.carousel-arrow:focus-visible {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cube-scene { transition-duration: .01ms !important; }
+  .cover-ornament { animation: none !important; }
+}
+
+/* Gentle floating flowers along the inner invitation sides. */
+.hero {
+  overflow: visible !important;
+}
+
+.hero-side-flowers {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hero-side-flowers .hero-flower {
+  position: absolute !important;
+  display: block;
+  width: clamp(62px, 11vw, 80px) !important;
+  height: clamp(150px, 33vw, 220px) !important;
+  object-fit: contain !important;
+  opacity: .28;
+  filter: drop-shadow(0 3px 8px rgba(79, 28, 24, .12));
+  will-change: transform;
+}
+
+.hero-side-flowers .hero-flower.left {
+  top: 38%;
+  left: -18px;
+  animation: innerFlowerFloatLeft 8.5s ease-in-out infinite;
+}
+
+.hero-side-flowers .hero-flower.right {
+  top: 52%;
+  right: -18px;
+  animation: innerFlowerFloatRight 9.5s ease-in-out -3s infinite;
+}
+
+.hero > :not(.hero-side-flowers) {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes innerFlowerFloatLeft {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  50% { transform: translate3d(5px, -12px, 0) rotate(0deg); }
+}
+
+@keyframes innerFlowerFloatRight {
+  0%, 100% { transform: translate3d(0, 0, 0) scaleX(-1) rotate(4deg); }
+  50% { transform: translate3d(-5px, -10px, 0) scaleX(-1) rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-side-flowers .hero-flower { animation: none !important; }
+}
+
+.invitation {
+  position: relative;
+}
+
+.invitation-side-flowers {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.side-blossom {
+  position: absolute;
+  width: clamp(28px, 7vw, 52px);
+  height: clamp(100px, 17vw, 130px);
+  object-fit: contain;
+  opacity: .15;
+  filter: drop-shadow(0 2px 6px rgba(79, 28, 24, .1));
+  animation-duration: 9s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: var(--flower-delay, 0s);
+  will-change: transform;
+}
+
+.side-blossom.left {
+  left: 0;
+  animation-name: railFlowerFloatLeft;
+}
+
+.side-blossom.right {
+  right: 0;
+  animation-name: railFlowerFloatRight;
+}
+
+@keyframes railFlowerFloatLeft {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  50% { transform: translate3d(4px, -10px, 0) rotate(0deg); }
+}
+
+@keyframes railFlowerFloatRight {
+  0%, 100% { transform: translate3d(0, 0, 0) scaleX(-1) rotate(4deg); }
+  50% { transform: translate3d(-4px, -10px, 0) scaleX(-1) rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .side-blossom { animation: none !important; }
+}
+
+/* Keep the wax seal visible on the envelope after opening. */
+.invitation.is-open .seal {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateX(-50%) !important;
 }
