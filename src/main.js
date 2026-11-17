@@ -75,7 +75,12 @@ root.innerHTML = `
         <span>♥</span>
       </div>
 
-      <div class="seal">D&nbsp;♥&nbsp;T</div>
+      <div class="seal">
+        <img
+          src="/images/wax-seal-heart.png"
+          alt="Con dấu sáp vàng hình trái tim"
+        >
+      </div>
     </div>
   </div>
 
