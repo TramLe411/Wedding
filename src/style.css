@@ -1,3 +1,6 @@
+/* Vietnamese-friendly typography: Lora + Be Vietnam Pro + Dancing Script */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
+
 :root{font-family:'Montserrat',sans-serif;color:#5a1721;background:#f4eee3;font-synthesis:none;text-rendering:optimizeLegibility;font-smooth:always;--wine:#5b111d;--wine2:#701d2a;--paper:#f7f1e7;--ink:#5a1721;--gold:#c7a477}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper)}button,a{font:inherit}button{cursor:pointer}.cover-screen{position:fixed;inset:0;z-index:20;background:radial-gradient(ellipse at center,#781e2c 0%,#4d0d18 100%);display:grid;place-items:center;padding:24px;overflow:hidden;animation:coverIn .7s ease both}.cover-screen:before,.cover-screen:after{content:"";position:absolute;width:320px;height:320px;border:1px solid rgba(226,196,157,.18);border-radius:50%;transform:rotate(35deg)}.cover-screen:before{left:-190px;top:-160px}.cover-screen:after{right:-190px;bottom:-180px}.cover-card{width:min(100%,360px);min-height:480px;background:#f7f0e5;border:1px solid #d9c3a3;box-shadow:0 18px 55px #21050b80;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:45px 24px;position:relative}.cover-card:before{content:"";position:absolute;inset:10px;border:1px solid #d7c4a8;pointer-events:none}.cover-heart{color:#6b1927;margin-bottom:23px}.eyebrow{font-size:9px;letter-spacing:.27em;font-weight:500;margin:0 0 18px;color:#8c5d55}.cover-card h1,.couple-names{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:.94;font-size:48px;margin:0;color:#681a27}.cover-card h1 span{display:block;font-size:26px;font-style:italic;margin:10px}.cover-rule{width:70px;height:1px;background:#b99b77;margin:28px auto 18px;position:relative}.cover-rule i{position:absolute;width:5px;height:5px;background:#b99b77;transform:rotate(45deg);top:-2px;left:calc(50% - 2px)}.cover-date{font-family:'Cormorant Garamond',serif;font-size:19px;margin:0 0 7px}.cover-venue{font-size:9px;letter-spacing:.22em;margin:0 0 25px}.open-button{background:var(--wine);color:#fff8ef;border:0;border-radius:30px;padding:12px 32px;font-size:11px;letter-spacing:.08em;box-shadow:0 5px 12px #4c101c35}.cover-ornament{position:absolute;color:#d4b38c;font-size:100px;opacity:.45}.top-left{top:8px;left:10px}.bottom-right{bottom:4px;right:12px;transform:rotate(180deg)}.cover-footer{position:absolute;bottom:20px;color:#d5b895;font-size:8px;letter-spacing:.35em}.invitation{max-width:520px;margin:auto;background:#f5efe5 url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.07' filter='url(%23n)'/%3E%3C/svg%3E");min-height:100vh;opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .8s ease,transform .8s ease}.invitation.is-open{opacity:1;transform:none;pointer-events:auto}.paper-section{position:relative;background-color:transparent}.hero{text-align:center;padding:54px 22px 30px;overflow:hidden}.envelope-wrap{width:230px;height:160px;margin:0 auto 34px;position:relative;perspective:700px}.envelope{position:absolute;inset:22px 15px 0;background:#671725;box-shadow:0 10px 22px #4e1b2233;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}.envelope-photo{position:absolute;z-index:2;left:50%;bottom:37px;width:160px;height:110px;padding:5px;background:#fffaf1;border:1px solid #dfceb7;box-shadow:0 7px 18px #210b0b45;transform:translate(-50%,34px) rotate(-2deg);opacity:0;will-change:transform,opacity}
 .envelope-photo img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#eee8df}
@@ -898,7 +901,7 @@ iframe {
     max-width: 460px;
     padding: 28px 24px;
   }
-
+   
   .days span {
     height: 36px;
     font-size: 14px;
@@ -952,4 +955,81 @@ iframe {
   .directions-button {
     min-height: 44px;
   }
+}
+
+
+/* =========================================================
+   VIETNAMESE TYPOGRAPHY UPDATE
+   - Be Vietnam Pro: clear body text and interface labels
+   - Lora: elegant, soft serif for names and headings
+   - Dancing Script: restrained handwritten accents
+   ========================================================= */
+:root {
+  font-family: "Be Vietnam Pro", "Segoe UI", Arial, sans-serif !important;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body, button, input, textarea, select,
+.open-button, .eyebrow, .cover-venue, .cover-footer,
+.family-columns .small-caps, .role, .ceremony-copy,
+.time-line, .weekday, .text-link, .footer {
+  font-family: "Be Vietnam Pro", "Segoe UI", Arial, sans-serif !important;
+}
+
+.cover-card h1,
+.couple-names,
+.family-columns p,
+.subheading,
+.announcement h2,
+.date-display strong,
+.section-title,
+.party-intro,
+.countdown strong,
+.calendar-paper h3,
+.days span,
+.location-address {
+  font-family: "Lora", Georgia, serif !important;
+  font-weight: 500;
+  font-synthesis: none;
+}
+
+/* Handwritten accents only — keeps the invitation elegant, not busy. */
+.cover-card h1 span,
+.couple-names span,
+.ampersand,
+.count-label,
+.lunar,
+.thank-you,
+.signature {
+  font-family: "Dancing Script", "Lora", cursive !important;
+  font-weight: 500;
+}
+
+/* Slightly improve readability of small Vietnamese labels. */
+.eyebrow,
+.cover-venue,
+.family-columns .small-caps,
+.role,
+.ceremony-copy,
+.time-line,
+.weekday,
+.footer {
+  letter-spacing: 0.08em;
+  line-height: 1.65;
+}
+
+.family-columns p,
+.location-address,
+.ceremony-copy,
+.thank-you {
+  line-height: 1.75;
+}
+
+/* Fallbacks remain graceful if Google Fonts is unavailable. */
+@media (max-width: 420px) {
+  .couple-names { line-height: 1.02; }
+  .family-columns p { line-height: 1.55; }
 }
