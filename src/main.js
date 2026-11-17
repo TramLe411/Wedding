@@ -87,6 +87,8 @@ root.innerHTML = `
       </div>
 
       <div class="envelope-front">
+        <i class="envelope-fold left" aria-hidden="true"></i>
+        <i class="envelope-fold right" aria-hidden="true"></i>
         <span>♥</span>
       </div>
 

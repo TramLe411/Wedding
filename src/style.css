@@ -1235,8 +1235,8 @@ body, button, input, textarea, select,
 }
 
 @keyframes coverFlowerFloatRight {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(330deg); }
-  50% { transform: translate3d(-7px, -8px, 0) rotate(330deg); }
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(340deg); }
+  50% { transform: translate3d(-7px, -8px, 0) rotate(340deg); }
 }
 
 .cover-card .cover-ornament {
@@ -1256,7 +1256,7 @@ body, button, input, textarea, select,
 .cover-card .cover-ornament.bottom-right {
   right: -25px;
   bottom: -75px;
-  transform: rotate(330deg);
+  transform: rotate(340deg);
   object-position: right bottom;
 }
 
@@ -2122,6 +2122,128 @@ body, button, input, textarea, select,
 
 @media (prefers-reduced-motion: reduce) {
   .side-blossom { animation: none !important; }
+}
+
+.announcement .subheading {
+  width: 100%;
+  max-width: 100%;
+  padding-inline: 4px;
+  font-size: clamp(13px, 3.7vw, 16px) !important;
+  letter-spacing: .035em !important;
+  line-height: 1.5;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  text-wrap: balance;
+}
+
+/* Keep the envelope front panel joined to the body's lower edge. */
+.envelope-front {
+  bottom: -2px !important;
+  border-radius: 0 0 2px 2px;
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, .045), transparent 48%),
+    radial-gradient(ellipse at 30% 25%, rgba(255, 255, 255, .09), transparent 48%),
+    radial-gradient(ellipse at 80% 75%, rgba(0, 0, 0, .14), transparent 55%),
+    linear-gradient(145deg, #762936 0%, #641b27 48%, #4e101b 100%) !important;
+}
+
+.invitation.is-open .envelope-front {
+  transform: translateZ(0) !important;
+  opacity: 1 !important;
+}
+
+/* Match the reference envelope: retain the raised rear flap and V-shaped pocket. */
+.envelope::before {
+  transform: none !important;
+  opacity: 1 !important;
+  backface-visibility: visible;
+}
+
+.invitation.is-open .envelope::before {
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+.envelope-front > span {
+  display: none !important;
+}
+
+/* Add the same tactile burgundy paper grain to every envelope layer. */
+.envelope {
+  background-image:
+    url("/images/envelope-texture.png"),
+    radial-gradient(ellipse at 30% 25%, rgba(255, 255, 255, .09), transparent 48%),
+    radial-gradient(ellipse at 80% 75%, rgba(0, 0, 0, .14), transparent 55%),
+    linear-gradient(145deg, #762936 0%, #641b27 48%, #4e101b 100%) !important;
+  background-size: 360px 360px, auto, auto, auto !important;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat !important;
+  background-blend-mode: soft-light, normal, normal, normal !important;
+}
+
+.envelope::before {
+  background-image:
+    url("/images/envelope-texture.png"),
+    linear-gradient(145deg, #873744, #5c1723 75%) !important;
+  background-size: 360px 360px, auto !important;
+  background-repeat: repeat, no-repeat !important;
+  background-blend-mode: soft-light, normal !important;
+}
+
+.envelope-front {
+  background-image:
+    url("/images/envelope-texture.png"),
+    linear-gradient(155deg, rgba(255, 255, 255, .045), transparent 48%),
+    radial-gradient(ellipse at 30% 25%, rgba(255, 255, 255, .09), transparent 48%),
+    radial-gradient(ellipse at 80% 75%, rgba(0, 0, 0, .14), transparent 55%),
+    linear-gradient(145deg, #762936 0%, #641b27 48%, #4e101b 100%) !important;
+  background-size: 360px 360px, auto, auto, auto, auto !important;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat !important;
+  background-blend-mode: soft-light, normal, normal, normal, normal !important;
+}
+
+/* Make the envelope's rear flap rise to a visible triangular peak. */
+.envelope::before {
+  top: 0 !important;
+  height: 66% !important;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%) !important;
+  background-image:
+    url("/images/envelope-texture.png"),
+    linear-gradient(145deg, #762936 0%, #4e101b 100%) !important;
+  background-size: 360px 360px, auto !important;
+  background-repeat: repeat, no-repeat !important;
+  background-blend-mode: soft-light, normal !important;
+  filter: drop-shadow(0 2px 3px rgba(40, 8, 14, .24));
+}
+
+/* Fine diagonal seams where the front envelope folds meet. */
+.envelope-front::before,
+.envelope-front::after {
+  display: none !important;
+}
+
+.envelope-fold {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  display: block;
+  width: 57%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(35, 5, 12, .38), rgba(255, 230, 215, .16));
+  box-shadow: 0 1px rgba(35, 5, 12, .12);
+  pointer-events: none;
+}
+
+.envelope-fold.left {
+  left: 0;
+  transform-origin: left bottom;
+  transform: rotate(-31deg);
+}
+
+.envelope-fold.right {
+  right: 0;
+  transform-origin: right bottom;
+  transform: rotate(31deg);
 }
 
 /* Keep the wax seal visible on the envelope after opening. */
