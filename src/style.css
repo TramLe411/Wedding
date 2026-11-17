@@ -158,7 +158,7 @@ html { scroll-behavior: smooth; }
   display: block;
   color: #9b3545;
   font-family: Georgia,serif;
-  font-size: clamp(16px,4vw,25px);
+  font-size: clamp(18px,4.4vw,28px);
   line-height: 1;
   text-shadow: 0 2px 7px #5a14222b;
   opacity: 0;
@@ -1246,7 +1246,7 @@ body, button, input, textarea, select,
   display: block;
   color: #e2c18e;
   font-family: Georgia, serif;
-  font-size: clamp(10px, 2.8vw, 16px);
+  font-size: clamp(12px, 3vw, 18px);
   line-height: 1;
   opacity: 0;
   text-shadow: 0 1px 5px rgba(255, 224, 184, .24);
@@ -1603,4 +1603,341 @@ body, button, input, textarea, select,
   .calendar-grid.days {
     grid-auto-rows: 54px !important;
   }
+}
+
+/* ==========================================
+   CALENDAR INSIDE PARTY CARD - FINAL LAYOUT
+   ========================================== */
+
+/* Khung thông tin tiệc cưới */
+.party-card {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  padding: 42px 16px 38px !important;
+}
+
+/* Lịch nằm bên trong khung đỏ, không tạo section riêng */
+.party-card .calendar-paper {
+  position: relative !important;
+  z-index: 2 !important;
+
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+
+  margin: 28px 0 0 !important;
+  padding: 30px 22px 38px !important;
+
+  background: #eee4d8 !important;
+  border: none !important;
+  border-radius: 17px !important;
+  box-shadow: none !important;
+
+  box-sizing: border-box !important;
+  color: #53141e !important;
+}
+
+/* Tiêu đề tháng */
+.party-card .calendar-paper h3 {
+  font-family: "Allura", cursive !important;
+  font-size: clamp(30px, 5.5vw, 42px) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+
+  color: #51151e !important;
+  letter-spacing: 0 !important;
+
+  margin: 0 0 25px !important;
+}
+
+/* Lưới 7 cột */
+.party-card .calendar-grid {
+  display: grid !important;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+/* Hàng thứ: đường kẻ mảnh như ảnh chuẩn */
+.party-card .calendar-grid.weekday {
+  border-top: 2px solid #c4aea5 !important;
+  border-bottom: 4px solid #54131d !important;
+
+  padding: 10px 0 12px !important;
+  margin: 0 0 12px !important;
+
+  color: #8b716c !important;
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-size: clamp(13px, 2.5vw, 19px) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.3 !important;
+}
+
+.party-card .calendar-grid.weekday span {
+  display: block !important;
+  text-align: center !important;
+}
+
+/* Các ngày */
+.party-card .calendar-grid.days {
+  grid-auto-rows: clamp(43px, 8vw, 58px) !important;
+  row-gap: 0 !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+/* Ngày thường */
+.party-card .calendar-grid.days > span {
+  position: relative !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+
+  color: #50131d !important;
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-size: clamp(19px, 3.5vw, 27px) !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+}
+
+/* Ô trống */
+.party-card .calendar-grid.days > .empty-day {
+  visibility: hidden !important;
+}
+
+/* Ô ngày cưới */
+.party-card .calendar-grid.days > .wedding-day {
+  display: grid !important;
+  place-items: center !important;
+
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* Hình trái tim */
+.party-card .wedding-day .heart-marker {
+  position: absolute !important;
+
+  width: 44px !important;
+  height: 40px !important;
+
+  top: 50% !important;
+  left: 50% !important;
+
+  display: block !important;
+  transform: translate(-50%, -50%) !important;
+
+  overflow: visible !important;
+}
+
+/* Số 16: căn giữa cả ngang lẫn dọc */
+.party-card .wedding-day .day-number {
+  position: relative !important;
+  z-index: 2 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  color: #fff8f0 !important;
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-size: 23px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+
+  transform: translateY(-3px) !important;
+}
+
+/* Nút thêm lịch ở dưới bảng lịch */
+.party-card .calendar-button {
+  position: relative !important;
+  z-index: 3 !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  margin: 26px auto 0 !important;
+}
+
+/* Ẩn link thêm lịch cũ trong bảng nếu còn sót */
+.party-card .calendar-paper .text-link {
+  display: none !important;
+}
+
+/* Mobile */
+@media (max-width: 420px) {
+  .party-card {
+    padding: 34px 12px 32px !important;
+  }
+
+  .party-card .calendar-paper {
+    margin-top: 24px !important;
+    padding: 26px 14px 30px !important;
+    border-radius: 15px !important;
+  }
+
+  .party-card .calendar-paper h3 {
+    margin-bottom: 20px !important;
+  }
+
+  .party-card .calendar-grid.weekday {
+    padding: 8px 0 10px !important;
+    margin-bottom: 9px !important;
+    border-top-width: 2px !important;
+    border-bottom-width: 4px !important;
+  }
+
+  .party-card .calendar-grid.days {
+    grid-auto-rows: 43px !important;
+  }
+
+  .party-card .wedding-day .heart-marker {
+    width: 39px !important;
+    height: 36px !important;
+  }
+
+  .party-card .wedding-day .day-number {
+    font-size: 21px !important;
+    transform: translateY(-3px) !important;
+  }
+}
+
+.location-section .location-title {
+  max-width: none;
+  font-size: clamp(10px, 3vw, 13px);
+  letter-spacing: .03em;
+  white-space: nowrap;
+}
+
+/* Improve readability for the smallest labels and supporting text. */
+.cover-card .eyebrow,
+.cover-venue,
+.role,
+.ceremony-copy,
+.time-line,
+.family-columns .small-caps,
+.family-columns small,
+.weekday,
+.text-link,
+.footer,
+.countdown small {
+  font-size: 11px !important;
+}
+
+.cover-footer {
+  font-size: 10px !important;
+}
+
+.open-button,
+.calendar-button,
+.directions-button {
+  font-size: 12px !important;
+}
+
+.party-intro,
+.date-display span,
+.days span {
+  font-size: 13px !important;
+}
+
+.location-section .location-title {
+  font-size: clamp(10px, 3vw, 13px) !important;
+}
+
+/* True cube rotation: adjacent photos are faces of one 3D box. */
+.carousel {
+  --cube-size: min(72vw, 330px);
+  --cube-half: min(36vw, 165px);
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+}
+
+.carousel > img {
+  display: none !important;
+}
+
+.cube-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--cube-size);
+  height: var(--cube-size);
+  transform: translate3d(-50%, -50%, 0) rotateY(0deg);
+  transform-style: preserve-3d;
+  transition: transform .95s cubic-bezier(.65, 0, .35, 1);
+  will-change: transform;
+}
+
+.cube-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: transparent;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.cube-front { transform: translateZ(var(--cube-half)); }
+.cube-right { transform: rotateY(90deg) translateZ(var(--cube-half)); }
+.cube-back { transform: rotateY(180deg) translateZ(var(--cube-half)); }
+.cube-left { transform: rotateY(-90deg) translateZ(var(--cube-half)); }
+
+.cube-face img {
+  position: absolute !important;
+  inset: 0;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain !important;
+  object-position: center;
+  transform: none !important;
+  background: transparent !important;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.cube-face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(35, 10, 18, .12), transparent 34%, transparent 72%, rgba(35, 10, 18, .16));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube-scene { transition-duration: .01ms !important; }
 }

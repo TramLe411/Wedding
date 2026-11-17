@@ -13,7 +13,7 @@ const photos = [
 
 const $ = (s) => document.querySelector(s);
 
-const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(w.mapQuery)}`;
+const mapUrl = `https://maps.app.goo.gl/uimpw1es5Mnmkfaw9`;
 const start = new Date(w.event.date);
 
 const calStart = '20261216T020000Z';
@@ -149,14 +149,12 @@ root.innerHTML = `
   <p class="section-title">ALBUM ẢNH</p>
 
   <div class="carousel" id="carousel">
-    <img class="side-photo left" id="leftPhoto"
-      src="${photos[6]}" alt="Ảnh cưới trước">
-
-    <img class="main-photo" id="mainPhoto"
-      src="${photos[0]}" alt="Album ảnh cưới">
-
-    <img class="side-photo right" id="rightPhoto"
-      src="${photos[1]}" alt="Ảnh cưới tiếp theo">
+    <div class="cube-scene" id="cubeScene" aria-live="polite">
+      <div class="cube-face cube-front"><img id="cubeFront" src="${photos[0]}" alt="Album"></div>
+      <div class="cube-face cube-right"><img id="cubeRight" src="${photos[1]}" alt=""></div>
+      <div class="cube-face cube-back"><img id="cubeBack" src="${photos[2]}" alt=""></div>
+      <div class="cube-face cube-left"><img id="cubeLeft" src="${photos[6]}" alt=""></div>
+    </div>
 
     <button class="carousel-arrow prev" id="prev"
       aria-label="Ảnh trước">‹</button>
@@ -172,6 +170,7 @@ root.innerHTML = `
     ).join('')}
   </div>
 </section>
+
 
 <section class="party-card burgundy-card reveal">
   <p class="section-title light">THÔNG TIN TIỆC CƯỚI</p>
@@ -196,15 +195,7 @@ root.innerHTML = `
     <div><strong id="cd-s">00</strong><small>Giây</small></div>
   </div>
 
-  <a class="calendar-button" href="${calendarUrl}"
-    target="_blank" rel="noreferrer">
-    ▦ &nbsp;Thêm vào lịch
-  </a>
-
-  <div class="floral-corner">❧</div>
-</section>
-
-<section class="calendar-section paper-section reveal">
+  <!-- CALENDAR nằm bên trong khung đỏ -->
   <div class="calendar-paper">
     <h3>Tháng 12 / 2026</h3>
 
@@ -213,44 +204,56 @@ root.innerHTML = `
         .map(x => `<span>${x}</span>`).join('')}
     </div>
 
-    
-<div class="calendar-grid days">
-  ${Array.from({ length: 35 }, (_, i) => {
-    const d = i - 1;
-    if (d < 1 || d > 31) {
-      return `<span class="empty-day"></span>`;
-    }
+    <div class="calendar-grid days">
+      ${Array.from({ length: 35 }, (_, i) => {
+        const d = i;
 
-    if (d === 16) {
-      return `
-        <span class="wedding-day">
-          <svg class="heart-marker" viewBox="0 0 100 90"
-               xmlns="http://www.w3.org/2000/svg"
-               aria-hidden="true">
-            <path d="M50 88
-              C43 81 5 52 5 27
-              C5 10 17 2 31 2
-              C40 2 47 7 50 16
-              C54 7 61 2 70 2
-              C84 2 95 10 95 27
-              C95 52 57 81 50 88Z"
-              fill="#651522"/>
-          </svg>
-          <span class="day-number">16</span>
-        </span>`;
-    }
+        if (d === 0 || d > 31) {
+          return `<span class="empty-day"></span>`;
+        }
 
-    return `<span class="calendar-day">${d}</span>`;
-  }).join('')}
-</div>
-</div>
-</section>
+        if (d === 16) {
+          return `
+            <span class="wedding-day">
+              <svg class="heart-marker"
+                   viewBox="0 0 100 90"
+                   xmlns="http://www.w3.org/2000/svg"
+                   aria-hidden="true">
+                <path
+                  d="M50 88
+                     C43 81 5 52 5 27
+                     C5 10 17 2 31 2
+                     C40 2 47 7 50 16
+                     C54 7 61 2 70 2
+                     C84 2 95 10 95 27
+                     C95 52 57 81 50 88Z"
+                  fill="#651522"
+                />
+              </svg>
+              <span class="day-number">16</span>
+            </span>
+          `;
+        }
 
+        return `<span class="calendar-day">${d}</span>`;
+      }).join('')}
+    </div>
   </div>
+
+  <!-- Nút thêm lịch nằm dưới bảng lịch -->
+  <a class="calendar-button"
+     href="${calendarUrl}"
+     target="_blank"
+     rel="noreferrer">
+    ▦ &nbsp;Thêm vào lịch
+  </a>
+
+  <div class="floral-corner">❧</div>
 </section>
+
 
 <section class="location-section paper-section reveal">
-  <p class="section-title">
+  <p class="section-title location-title">
     TIỆC CƯỚI SẼ TỔ CHỨC TẠI TƯ GIA NAM
   </p>
 
@@ -292,19 +295,32 @@ const audio = $('#music');
 
 startAmbientParticles();
 
+let slideTransitionTimer;
+let slideAnimating = false;
+let cubeTurns = 0;
+const cubeFaces = [$('#cubeFront'), $('#cubeRight'), $('#cubeBack'), $('#cubeLeft')];
+
 function renderSlide() {
-  const mainPhoto = $('#mainPhoto');
-  mainPhoto.classList.add('photo-changing');
+  if (slideAnimating) return;
+  slideAnimating = true;
 
-  window.setTimeout(() => {
-    mainPhoto.src = photos[slide];
-    $('#leftPhoto').src = photos[(slide - 1 + photos.length) % photos.length];
-    $('#rightPhoto').src = photos[(slide + 1) % photos.length];
+  const carousel = $('#carousel');
+  const cubeScene = $('#cubeScene');
+  window.clearTimeout(slideTransitionTimer);
+  const incomingFace = (cubeTurns + 1) % cubeFaces.length;
+  cubeFaces[incomingFace].src = photos[slide];
+  cubeTurns += 1;
+  cubeScene.style.transform = `translate3d(-50%, -50%, 0) rotateY(${-90 * cubeTurns}deg)`;
 
-    requestAnimationFrame(() =>
-      mainPhoto.classList.remove('photo-changing')
-    );
-  }, 140);
+  slideTransitionTimer = window.setTimeout(() => {
+    const frontFace = cubeTurns % cubeFaces.length;
+    const photoOffsets = [0, 1, 2, -1];
+    photoOffsets.forEach((offset, position) => {
+      const faceIndex = (frontFace + position) % cubeFaces.length;
+      cubeFaces[faceIndex].src = photos[(slide + offset + photos.length) % photos.length];
+    });
+    slideAnimating = false;
+  }, 950);
 
   document.querySelectorAll('#dots button').forEach((b, i) =>
     b.classList.toggle('active', i === slide)
@@ -312,11 +328,13 @@ function renderSlide() {
 }
 
 function next() {
+  if (slideAnimating) return;
   slide = (slide + 1) % photos.length;
   renderSlide();
 }
 
 function prev() {
+  if (slideAnimating) return;
   slide = (slide - 1 + photos.length) % photos.length;
   renderSlide();
 }
@@ -326,8 +344,9 @@ $('#prev').addEventListener('click', prev);
 
 $('#dots').addEventListener('click', e => {
   const b = e.target.closest('button[data-index]');
-  if (b) {
-    slide = Number(b.dataset.index);
+  if (b && !slideAnimating) {
+    const nextSlide = Number(b.dataset.index);
+    slide = nextSlide;
     renderSlide();
   }
 });
@@ -351,9 +370,9 @@ function startAmbientParticles() {
 
     particle.style.left = (4 + Math.random() * 92) + 'vw';
     particle.style.setProperty('--drift', (Math.random() * 100 - 50).toFixed(1) + 'px');
-    particle.style.setProperty('--rise', (90 + Math.random() * 170).toFixed(1) + 'px');
+    particle.style.setProperty('--rise', (window.innerHeight + 70 + Math.random() * 110).toFixed(1) + 'px');
     particle.style.setProperty('--duration', (6.5 + Math.random() * 4).toFixed(2) + 's');
-    particle.style.setProperty('--scale', (0.55 + Math.random() * 0.7).toFixed(2));
+    particle.style.setProperty('--scale', (0.7 + Math.random() * 0.75).toFixed(2));
     layer.appendChild(particle);
 
     particle.addEventListener('animationend', () => particle.remove(), { once: true });
@@ -389,10 +408,10 @@ function launchHearts() {
     heart.textContent = symbols[i % symbols.length];
 
     const drift = (Math.random() * 230 - 115).toFixed(1) + 'px';
-    const rise = (210 + Math.random() * 170).toFixed(1) + 'px';
+    const rise = (originY + 50 + Math.random() * 100).toFixed(1) + 'px';
     const duration = (2.1 + Math.random() * 1.15).toFixed(2) + 's';
     const delay = (Math.random() * .32).toFixed(2) + 's';
-    const scale = (0.65 + Math.random() * .85).toFixed(2);
+    const scale = (0.8 + Math.random() * .85).toFixed(2);
 
     heart.style.setProperty('--drift', drift);
     heart.style.setProperty('--rise', rise);
@@ -411,6 +430,43 @@ function launchHearts() {
   }
 }
 
+function slowlyScrollToBottom(duration = 120000) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const root = document.documentElement;
+  const previousScrollBehavior = root.style.scrollBehavior;
+  const maxScroll = Math.max(0, root.scrollHeight - window.innerHeight);
+  const startedAt = performance.now();
+  let frameId;
+
+  root.style.scrollBehavior = 'auto';
+
+  const stop = () => {
+    cancelAnimationFrame(frameId);
+    root.style.scrollBehavior = previousScrollBehavior;
+    window.removeEventListener('wheel', stop);
+    window.removeEventListener('touchstart', stop);
+    window.removeEventListener('keydown', stop);
+  };
+
+  window.addEventListener('wheel', stop, { once: true, passive: true });
+  window.addEventListener('touchstart', stop, { once: true, passive: true });
+  window.addEventListener('keydown', stop, { once: true });
+
+  const step = (now) => {
+    const progress = Math.min((now - startedAt) / duration, 1);
+    window.scrollTo(0, maxScroll * progress);
+
+    if (progress < 1) {
+      frameId = requestAnimationFrame(step);
+    } else {
+      stop();
+    }
+  };
+
+  frameId = requestAnimationFrame(step);
+}
+
 $('#open').addEventListener('click', async () => {
   const openButton = $('#open');
 
@@ -423,6 +479,7 @@ $('#open').addEventListener('click', async () => {
   $('#musicToggle').hidden = false;
 
   launchHearts();
+  window.setTimeout(() => slowlyScrollToBottom(), 850);
 
   try {
     await audio.play();
