@@ -1070,3 +1070,244 @@ body, button, input, textarea, select,
         object-position: center center !important;
     }
 }
+
+
+
+/* =========================================================
+   VIDEO-MATCHED OPENING COVER
+   Compact centered invitation, real floral corners and
+   slow floating gold hearts/petals on the burgundy backdrop.
+   ========================================================= */
+.cover-screen {
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  padding: 22px 16px;
+  background:
+    radial-gradient(ellipse at 50% 43%, rgba(128, 35, 49, .96) 0%, rgba(91, 17, 30, .98) 56%, #4b0d18 100%) !important;
+}
+
+.cover-screen::before,
+.cover-screen::after {
+  width: clamp(250px, 70vw, 430px);
+  height: clamp(250px, 70vw, 430px);
+  border-color: rgba(226, 196, 157, .12);
+}
+
+.cover-card {
+  z-index: 2;
+  width: min(88vw, 390px) !important;
+  min-height: 0 !important;
+  height: clamp(405px, 56svh, 535px);
+  padding: clamp(28px, 5.5vh, 48px) 22px !important;
+  justify-content: center;
+  background: #f8f2e8 !important;
+  border: 1px solid #d9c6a9;
+  box-shadow: 0 16px 42px rgba(25, 3, 9, .34), 0 2px 8px rgba(255,255,255,.12);
+}
+
+.cover-card::before {
+  inset: 9px !important;
+  border: 1px solid rgba(190, 166, 132, .72) !important;
+}
+
+.cover-heart {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto clamp(18px, 3.2vh, 27px) !important;
+  border-radius: 50%;
+  color: #f9eee0 !important;
+  background: #651724;
+  font-size: 19px;
+  line-height: 1;
+  box-shadow: 0 3px 9px rgba(76, 14, 27, .18);
+}
+
+.cover-card .eyebrow {
+  margin-bottom: clamp(16px, 3vh, 25px) !important;
+  color: #98766c;
+  font-size: clamp(9px, 2.3vw, 11px);
+  letter-spacing: .17em;
+}
+
+.cover-card h1 {
+  width: 100%;
+  font-family: "Lora", Georgia, serif !important;
+  font-size: clamp(30px, 8vw, 39px) !important;
+  font-weight: 500 !important;
+  line-height: 1.13 !important;
+  letter-spacing: -.035em;
+  margin: 0 !important;
+  color: #681a27;
+  text-wrap: balance;
+}
+
+.cover-card h1 span {
+  display: block;
+  margin: 7px 0 !important;
+  font-family: "Dancing Script", cursive !important;
+  font-size: clamp(22px, 5.8vw, 29px) !important;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.cover-rule {
+  width: 74px;
+  margin: clamp(20px, 3.8vh, 30px) auto 16px !important;
+  background: #bda17c;
+}
+
+.cover-date {
+  font-family: "Lora", Georgia, serif !important;
+  font-size: clamp(15px, 4vw, 19px) !important;
+  line-height: 1.45;
+  margin: 0 0 7px !important;
+  color: #71434a;
+}
+
+.cover-venue {
+  margin: 0 0 clamp(22px, 4vh, 32px) !important;
+  color: #785c57;
+  font-size: 10px !important;
+  letter-spacing: .16em !important;
+}
+
+.open-button {
+  min-width: 132px;
+  min-height: 42px;
+  padding: 11px 28px !important;
+  border-radius: 28px !important;
+  background: linear-gradient(135deg, #741d2d, #590f1d) !important;
+  color: #fff8ef;
+  font-family: "Be Vietnam Pro", sans-serif !important;
+  font-size: 11px !important;
+  letter-spacing: .09em;
+  box-shadow: 0 6px 16px rgba(76, 14, 27, .24) !important;
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+.open-button:active {
+  transform: translateY(1px) scale(.97);
+  box-shadow: 0 3px 8px rgba(76, 14, 27, .2) !important;
+}
+
+.cover-ornament {
+  position: absolute !important;
+  z-index: 3;
+  display: block;
+  width: clamp(86px, 25vw, 142px) !important;
+  height: clamp(125px, 34vw, 190px) !important;
+  object-fit: contain !important;
+  opacity: .98 !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 8px rgba(28, 5, 11, .18));
+}
+
+.cover-ornament.top-left {
+  top: 17%;
+  left: -1%;
+  transform: rotate(-9deg);
+  object-position: left top;
+}
+
+.cover-ornament.bottom-right {
+  right: -1%;
+  bottom: 13%;
+  transform: rotate(171deg);
+  object-position: right bottom;
+}
+
+.cover-footer {
+  z-index: 2;
+  bottom: max(17px, env(safe-area-inset-bottom));
+  color: rgba(236, 211, 184, .86);
+  font-family: "Be Vietnam Pro", sans-serif !important;
+  font-size: 8px;
+  letter-spacing: .32em;
+}
+
+#heartParticles.heart-particles {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 25 !important;
+  width: 100%;
+  height: 100%;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.ambient-particle {
+  position: absolute;
+  bottom: -28px;
+  display: block;
+  color: #e2c18e;
+  font-family: Georgia, serif;
+  font-size: clamp(10px, 2.8vw, 16px);
+  line-height: 1;
+  opacity: 0;
+  text-shadow: 0 1px 5px rgba(255, 224, 184, .24);
+  animation: coverAmbientFloat var(--duration, 8s) ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.ambient-particle:nth-child(4n + 1) { color: #e7c99b; }
+.ambient-particle:nth-child(4n + 2) { color: #c58d7a; }
+.ambient-particle:nth-child(4n + 3) { color: #f0dfc1; }
+
+@keyframes coverAmbientFloat {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(-18deg) scale(.65);
+  }
+  12% { opacity: .72; }
+  78% { opacity: .48; }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift, 0), calc(var(--rise, 140px) * -1), 0)
+      rotate(35deg) scale(var(--scale, 1));
+  }
+}
+
+@media (max-width: 380px) {
+  .cover-screen { padding: 16px 12px; }
+  .cover-card {
+    width: min(90vw, 350px) !important;
+    height: clamp(390px, 57svh, 490px);
+    padding-inline: 17px !important;
+  }
+  .cover-card h1 { font-size: clamp(28px, 8.2vw, 34px) !important; }
+  .cover-ornament.top-left { left: -4%; top: 18%; }
+  .cover-ornament.bottom-right { right: -4%; bottom: 14%; }
+}
+
+@media (min-width: 700px) {
+  .cover-card {
+    width: min(440px, 46vw) !important;
+    height: clamp(500px, 64vh, 590px);
+  }
+  .cover-card h1 { font-size: clamp(39px, 4vw, 48px) !important; }
+  .cover-ornament.top-left { left: calc(50% - 300px); top: 14%; }
+  .cover-ornament.bottom-right { right: calc(50% - 300px); bottom: 12%; }
+}
+
+@media (max-height: 620px) {
+  .cover-card {
+    height: min(88svh, 490px);
+    padding-top: 22px !important;
+    padding-bottom: 22px !important;
+  }
+  .cover-heart { margin-bottom: 12px !important; }
+  .cover-card .eyebrow { margin-bottom: 12px !important; }
+  .cover-rule { margin-top: 15px !important; }
+  .cover-venue { margin-bottom: 14px !important; }
+  .cover-footer { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-particle { display: none !important; animation: none !important; }
+  .open-button { transition: none !important; }
+}
