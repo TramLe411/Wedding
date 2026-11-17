@@ -1,3 +1,4 @@
+
 import { wedding as w } from './config.js';
 
 const photos = [
