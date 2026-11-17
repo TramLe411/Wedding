@@ -1033,3 +1033,40 @@ body, button, input, textarea, select,
   .couple-names { line-height: 1.02; }
   .family-columns p { line-height: 1.55; }
 }
+/* =========================================
+   ALBUM FIX - KEEP ORIGINAL IMAGE RATIO
+   ========================================= */
+
+/* Ảnh chính và hai ảnh phụ */
+#mainPhoto,
+#leftPhoto,
+#rightPhoto {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: contain !important;
+    object-position: center center !important;
+
+    max-width: 100%;
+    display: block;
+
+    /* Không cắt ảnh */
+    overflow: visible;
+}
+
+/* Giữ nền khung ảnh đồng nhất */
+.main-photo,
+.side-photo {
+    background-color: #f5efe3;
+    overflow: hidden;
+}
+
+/* Đảm bảo ảnh không bị biến dạng trên điện thoại */
+@media screen and (max-width: 600px) {
+    #mainPhoto,
+    #leftPhoto,
+    #rightPhoto {
+        object-fit: contain !important;
+        object-position: center center !important;
+    }
+}
