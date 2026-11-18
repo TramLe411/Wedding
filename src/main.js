@@ -49,7 +49,7 @@ root.innerHTML = `
     <div class="cover-rule"><i></i></div>
 
     <p class="cover-date">16 tháng 12, 2026</p>
-    <p class="cover-venue">Tư Gia Nam</p>
+    <p class="cover-venue">Tư Gia Nhà Trai</p>
 
     <button class="open-button" id="open">Mở thiệp</button>
   </div>
@@ -271,7 +271,7 @@ root.innerHTML = `
 
 <section class="location-section paper-section reveal">
   <p class="section-title location-title">
-    TIỆC CƯỚI SẼ TỔ CHỨC TẠI TƯ GIA NAM
+    TIỆC CƯỚI SẼ TỔ CHỨC TẠI TƯ GIA NHÀ TRAI
   </p>
 
   <p class="location-address">${w.event.address}</p>
