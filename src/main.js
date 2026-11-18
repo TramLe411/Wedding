@@ -13,17 +13,14 @@ const photos = [
 
 const $ = (s) => document.querySelector(s);
 
-const mapUrl = w.mapUrl;
+const mapUrl = `https://maps.app.goo.gl/uimpw1es5Mnmkfaw9`;
 const start = new Date(w.event.date);
-const [eventYear, eventMonth, eventDay] = w.event.date.slice(0, 10).split('-').map(Number);
-const calendarFirstWeekday = (new Date(eventYear, eventMonth - 1, 1).getDay() + 6) % 7;
-const calendarDaysInMonth = new Date(eventYear, eventMonth, 0).getDate();
 
-const calStart = '20261206T040000Z';
-const calEnd = '20261206T060000Z';
+const calStart = '20261216T020000Z';
+const calEnd = '20261216T040000Z';
 
 const calendarUrl =
-  `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`${w.event.type} ${w.bride.fullName} & ${w.groom.fullName}`)}&dates=${calStart}/${calEnd}&details=${encodeURIComponent(`Trân trọng kính mời. Địa điểm: ${w.event.venue}. ${w.event.address}`)}&location=${encodeURIComponent(w.event.address)}`;
+  `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Lễ tân hôn ${w.groom.fullName} & ${w.bride.fullName}`)}&dates=${calStart}/${calEnd}&details=${encodeURIComponent(`Trân trọng kính mời. Địa điểm: ${w.event.venue}. ${w.event.address}`)}&location=${encodeURIComponent(w.event.address)}`;
 
 const root = $('#root');
 
@@ -44,15 +41,15 @@ root.innerHTML = `
 
     <!-- SHORT NAMES ON THE FRONT COVER -->
     <h1>
-      Như Trâm
-      <span>&</span>
       Duy Thành
+      <span>&</span>
+      Như Trâm
     </h1>
 
     <div class="cover-rule"><i></i></div>
 
-    <p class="cover-date">06 tháng 12, 2026</p>
-    <p class="cover-venue">Tư gia nhà gái</p>
+    <p class="cover-date">16 tháng 12, 2026</p>
+    <p class="cover-venue">Tư Gia Nam</p>
 
     <button class="open-button" id="open">Mở thiệp</button>
   </div>
@@ -86,7 +83,7 @@ root.innerHTML = `
 
     <div class="envelope">
       <div class="envelope-photo">
-        <img src="/images/photo-03.jpg" alt="Ảnh cưới Như Trâm và Duy Thành">
+        <img src="/images/photo-03.jpg" alt="Ảnh cưới Duy Thành và Như Trâm">
       </div>
 
       <div class="envelope-front">
@@ -107,9 +104,9 @@ root.innerHTML = `
   <p class="eyebrow">THE WEDDING OF</p>
 
   <h1 class="couple-names">
-    ${w.bride.fullName}<br>
+    ${w.groom.fullName}<br>
     <span>&</span><br>
-    ${w.groom.fullName}
+    ${w.bride.fullName}
   </h1>
 
   <div class="tiny-flower">❧</div>
@@ -118,19 +115,17 @@ root.innerHTML = `
 <section class="family-card burgundy-card reveal">
   <div class="family-columns">
     <div>
-      <p class="small-caps">Nhà gái</p>
-      <p class="small-caps">Ông Bà</p>
-      <p>${w.brideFamily.father}</p>
-      <p>${w.brideFamily.mother}</p>
-      <small>${w.brideFamily.address}</small>
-    </div>
-
-    <div>
-      <p class="small-caps">Nhà trai</p>
       <p class="small-caps">Ông Bà</p>
       <p>${w.groomFamily.father}</p>
       <p>${w.groomFamily.mother}</p>
       <small>${w.groomFamily.address}</small>
+    </div>
+
+    <div>
+      <p class="small-caps">Ông Bà</p>
+      <p>${w.brideFamily.father}</p>
+      <p>${w.brideFamily.mother}</p>
+      <small>${w.brideFamily.address}</small>
     </div>
   </div>
 
@@ -139,18 +134,18 @@ root.innerHTML = `
 
 <section class="announcement paper-section reveal">
   <p class="eyebrow">TRÂN TRỌNG BÁO TIN</p>
-  <p class="subheading">LỄ VU QUY CỦA CON CHÚNG TÔI</p>
-
-  <h2>${w.bride.fullName}</h2>
-  <p class="role">${w.bride.title}</p>
-
-  <div class="ampersand">&</div>
+  <p class="subheading">LỄ TÂN HÔN CỦA CON CHÚNG TÔI</p>
 
   <h2>${w.groom.fullName}</h2>
   <p class="role">${w.groom.title}</p>
 
+  <div class="ampersand">&</div>
+
+  <h2>${w.bride.fullName}</h2>
+  <p class="role">${w.bride.title}</p>
+
   <p class="ceremony-copy">
-    LỄ VU QUY ĐƯỢC CỬ HÀNH TẠI<br>
+    LỄ TÂN HÔN ĐƯỢC CỬ HÀNH TẠI<br>
     <strong>${w.event.venue.toUpperCase()}</strong>
   </p>
 
@@ -227,14 +222,14 @@ root.innerHTML = `
     </div>
 
     <div class="calendar-grid days">
-      ${Array.from({ length: Math.ceil((calendarFirstWeekday + calendarDaysInMonth) / 7) * 7 }, (_, i) => {
-        const d = i - calendarFirstWeekday + 1;
+      ${Array.from({ length: 35 }, (_, i) => {
+        const d = i;
 
-        if (d < 1 || d > calendarDaysInMonth) {
+        if (d === 0 || d > 31) {
           return `<span class="empty-day"></span>`;
         }
 
-        if (d === eventDay) {
+        if (d === 16) {
           return `
             <span class="wedding-day">
               <svg class="heart-marker"
@@ -252,7 +247,7 @@ root.innerHTML = `
                   fill="#651522"
                 />
               </svg>
-              <span class="day-number">6</span>
+              <span class="day-number">16</span>
             </span>
           `;
         }
@@ -276,7 +271,7 @@ root.innerHTML = `
 
 <section class="location-section paper-section reveal">
   <p class="section-title location-title">
-    LỄ VU QUY TỔ CHỨC TẠI TƯ GIA NỮ
+    TIỆC CƯỚI SẼ TỔ CHỨC TẠI TƯ GIA NAM
   </p>
 
   <p class="location-address">${w.event.address}</p>
@@ -303,7 +298,7 @@ root.innerHTML = `
 </section>
 
 <footer class="footer">
-  NHƯ TRÂM <span>♥</span> DUY THÀNH · 2026
+  DUY THÀNH <span>♥</span> NHƯ TRÂM · 2026
 </footer>
 
 </main>

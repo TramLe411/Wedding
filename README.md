@@ -1,4 +1,4 @@
-# Thiệp Vu Quy online — Lê Thị Như Trâm & Bùi Duy Thành
+# Thiệp cưới online — Bùi Duy Thành & Lê Thị Như Trâm
 
 Website thiệp cưới một trang, tối ưu mobile, dựng theo video tham chiếu và sử dụng 7 ảnh cưới được cung cấp.
 
